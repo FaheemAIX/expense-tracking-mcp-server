@@ -1,4 +1,3 @@
-from prefect import flow   # ← for deploying to Prefect Cloud, you can remove this import and the @flow decorator
 from fastmcp import FastMCP
 import os
 import sqlite3
@@ -77,10 +76,7 @@ def categories():
     # Read fresh each time so you can edit the file without restarting
     with open(CATEGORIES_PATH, "r", encoding="utf-8") as f:
         return f.read()
-
-@flow
-def run_mcp_server():
-    mcp.run(transport="http", host="0.0.0.0", port=8000)
+    
 
 if __name__ == "__main__":
-    run_mcp_server()
+    mcp.run(transport="http", host="0.0.0.0", port=8000)
